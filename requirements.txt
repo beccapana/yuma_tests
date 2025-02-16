@@ -1,0 +1,12 @@
+torch
+torchvision 
+ultralytics 
+opencv-python 
+numpy 
+pyautogui
+psutil 
+keyboard
+cv2
+pyautogui
+pyatest
+PIL
