@@ -8,8 +8,3 @@ from config import *
 run_bat_and_wait_for_output("run_yuma.bat", "Entering main loop.")
 
 test_check_moves()
-
-
-
-
-
