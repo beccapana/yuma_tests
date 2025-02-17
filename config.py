@@ -1,14 +1,15 @@
 import psutil 
 import keyboard
+import subprocess
 
-YUMA_PROCESS_NAME = "Igor"
-
-def find_process_by_name(name):
-    for process in psutil.process_iter(['pid', 'name']):
-        if process.info['name'] and name.lower() in process.info['name'].lower():
-            return process.info
-    return None
-
-def start_tests():
-    print("Press NumPad '0' to start tests")
-    keyboard.wait("num 0")
+def run_bat_and_wait_for_output(bat_file, target_text):
+    process = subprocess.Popen(bat_file, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
+    
+    for line in iter(process.stdout.readline, ''):
+        print(line, end="")  # Отобразить вывод батника в консоли
+        if target_text in line:
+            print(f"\nНайдено: {target_text}. Завершаем ожидание.")
+            process.terminate()  # Завершаем процесс, если нашли нужный текст
+            break
+    
+    process.wait()
