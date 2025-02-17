@@ -47,7 +47,7 @@ def press_key_for_duration(key, template_path, interval=0.5, confidence=0.7):
     keyboard.release(key)  # Отпускаем клавишу после обнаружения изображения
 
 def test_check_moves():
-    press_key_for_duration("w", "flags/signal_W.png", confidence=0.8)
-    #press_key_for_duration("a", "flags/signal_A.png", confidence=0.38)
+    press_key_for_duration("w", "flags/signal_W.png")
+    press_key_for_duration("a", "flags/signal_W.png")
     #press_key_for_duration("s", "flags/signal_true.png", confidence=0.55)
     #press_key_for_duration("d", "flags/signal_false.png", confidence=0.55)
