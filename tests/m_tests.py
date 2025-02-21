@@ -8,7 +8,7 @@ import numpy as np
 from typing import Optional, Tuple
 
 #Применяет цветовую маску к изображению
-def apply_color_mask(image: np.ndarray, lower_bound: np.ndarray, upper_bound: np.ndarray) -> np.ndarray:
+def apply_color_mask(image: np.ndarray, lower_bound: np.ndarray, upper_bound: np.ndarray):
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
     kernel = np.ones((3, 3), np.uint8)
@@ -17,17 +17,17 @@ def apply_color_mask(image: np.ndarray, lower_bound: np.ndarray, upper_bound: np
     return cv2.bitwise_and(image, image, mask=mask)
 
 #Возвращает границы цвета для заданного флага
-def get_color_bounds(flag_type: str) -> Tuple[np.ndarray, np.ndarray]:
+def get_color_bounds(flag_type: str):
     color_bounds = {
         "W": (np.array([35, 50, 50]), np.array([85, 255, 255])),  # Зеленый
         "A": (np.array([20, 50, 50]), np.array([35, 255, 255])),  # Желтый
-        #"S": (np.array([100, 50, 50]), np.array([140, 255, 255])),  # Синий
-        #"D": (np.array([0, 50, 50]), np.array([10, 255, 255]))   # Красный
-    }
+        "S": (np.array([100, 50, 50]), np.array([140, 255, 255])),  # Синий
+        "D": (np.array([170, 50, 50]), np.array([180, 255, 255]))    #красный
+        }
     return color_bounds.get(flag_type, (np.array([0, 0, 0]), np.array([179, 255, 255])))
 
 #Ищет изображение на экране, используя шаблон
-def find_image_on_screen(template_path: str, flag_type: str, confidence: float = 0.7, use_color: bool = True) -> Optional[Tuple[int, int]]:
+def find_image_on_screen(template_path: str, flag_type: str, confidence: float = 0.7, use_color: bool = True):
     screenshot = cv2.cvtColor(np.array(pyautogui.screenshot()), cv2.COLOR_RGB2BGR)
     template = cv2.imread(template_path, cv2.IMREAD_COLOR)
     if template is None:
@@ -67,5 +67,5 @@ def press_key_for_duration(key: str, template_path: str, flag_type: str, interva
         print(f"Изображение '{template_path}' найдено, клавиша '{key}' отпущена.")
 
 def test_check_moves():
-    for key, flag in zip("wa", "WA"):
-        press_key_for_duration(key, f"flags/signal_{flag}.png", flag, confidence=0.9)
+    for key, flag in zip("wasd", "WASD"):
+        press_key_for_duration(key, f"images/flags/signal_{flag}.png", flag, confidence=0.9)
