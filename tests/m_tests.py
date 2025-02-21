@@ -1,16 +1,10 @@
-import os
 import time
-from typing import Optional, Tuple
-import pytest
-
 import keyboard
 import subprocess
 import keyboard
 import pyautogui
 import cv2
 import numpy as np
-import time
-
 def run_bat_and_wait_for_output(bat_file, target_text):
     process = subprocess.Popen(bat_file, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
     
@@ -18,7 +12,7 @@ def run_bat_and_wait_for_output(bat_file, target_text):
         print(line, end="")  # Отобразить вывод батника в консоли
         if target_text in line:
             print(f"\nНайдено: {target_text}. Завершаем ожидание.")
-            process.terminate()  # Завершаем процесс, если нашли нужный текст
+            process.terminate()
             break
     
     process.wait()
@@ -40,7 +34,7 @@ def get_color_bounds(flag_type: str):
         "S": (np.array([105, 80, 80]), np.array([135, 255, 255])), # Синий
         "D": (np.array([170, 50, 50]), np.array([180, 255, 255]))  # Красный
     }
-    return color_bounds.get(flag_type, (np.array([0, 0, 0]), np.array([179, 255, 255])))
+    return color_bounds.get(flag_type, (np.array([0, 0, 0]), np.array([180, 255, 255])))
 
 # Ищет изображение на экране, используя шаблон
 def find_image_on_screen(template_path: str, flag_type: str, confidence: float = 0.7, use_color: bool = True):
@@ -81,4 +75,4 @@ def test_check_moves():
     for key, flag in zip("wasd", "WASD"):
         print(f"Проверка флага '{flag}'...")
         press_key_for_duration(key, f"images/flags/signal_{flag}.png", flag, confidence=0.85)
-        time.sleep(0.5)  # Задержка между нажатиями
+        time.sleep(0.5)
