@@ -21,7 +21,7 @@ def get_color_bounds(flag_type: str):
     color_bounds = {
         "W": (np.array([35, 50, 50]), np.array([85, 255, 255])),  # Зеленый
         "A": (np.array([20, 50, 50]), np.array([35, 255, 255])),  # Желтый
-        "S": (np.array([110, 100, 100]), np.array([130, 255, 255])),
+        "S": (np.array([110, 100, 100]), np.array([130, 255, 255])), #Синий
         "D": (np.array([170, 50, 50]), np.array([180, 255, 255]))    #красный
         }
     return color_bounds.get(flag_type, (np.array([0, 0, 0]), np.array([179, 255, 255])))

@@ -1,8 +1,6 @@
-opencv-python 
-numpy 
-pyautogui
-psutil 
+psutil
 keyboard
-cv2
+pytest
 pyautogui
-pyatest
+opencv-python
+numpy
