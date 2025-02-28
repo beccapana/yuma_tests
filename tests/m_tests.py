@@ -7,15 +7,15 @@ import numpy as np
 import psutil
 from typing import Optional, Tuple
 
-def is_system_sound_muted(): #TODO: to config
+def is_system_sound_muted(): #TODO: to config. ловил баг
     command = "(Get-AudioDevice -Playback).Mute"
     result = subprocess.run(["powershell", "-Command", command], capture_output=True, text=True)
     return "True" in result.stdout
 
-def unmute_system_sound(): #TODO: to config
+def unmute_system_sound(): #TODO: to config. ловил баг
     subprocess.run(["powershell", "-Command", "(Get-AudioDevice -Playback).Mute = $false"])
 
-def handle_sound_issue(): #TODO: to config
+def handle_sound_issue(): #TODO: to config. ловил баг
     if is_system_sound_muted():
         print("Системный звук отключен. Включаем обратно...")
         unmute_system_sound()
@@ -89,7 +89,7 @@ def test_check_moves():
     for key, flag in zip("wasd", "WASD"):
         print(f"Проверка флага '{flag}'...")
         press_key_for_duration(key, f"images/flags/signal_{flag}.png", flag, confidence=0.85)
-        if flag == 'S':
+        if flag == 'S': #ловлю баг
             handle_sound_issue()
         time.sleep(0.5)
     #print("=== КОНЕЦ test_check_moves ===") #ловил баг
