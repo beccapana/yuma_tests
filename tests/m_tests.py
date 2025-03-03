@@ -109,7 +109,7 @@ def monitor_sound_mute(): #TODO: to config
             previous_state = current_state
         time.sleep(1)
 
-def find_yuma_on_screen(confidence: float = 0.7):
+def find_yuma_on_screen(confidence: float = 0.7): #TODO: to yuma_tests
     yuma_images = {
         "Back": "images/yuma/YumaBack.png",
         "Front": "images/yuma/YumaFront.png",
